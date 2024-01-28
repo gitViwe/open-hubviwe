@@ -1,0 +1,60 @@
+receivers:
+ otlp:
+   protocols:
+     http:
+       endpoint: :4318
+       include_metadata: true
+       cors:
+        allowed_origins: 
+          - https://localhost:7267
+          - http://localhost:5062
+     grpc:
+       endpoint: :4317
+
+processors:
+ batch:
+   timeout: 1s
+ resource:
+   attributes:
+     - key: otlp-collector-environment
+       value: docker
+       action: insert
+
+exporters:
+ otlphttp/seq:
+   endpoint: http://seq:5341/ingest/otlp
+   tls:
+     insecure: true
+ otlphttp/jaeger:
+   endpoint: http://jaeger:4318
+   tls:
+     insecure: true
+ logging:
+   loglevel: info
+ prometheus:
+   endpoint: :8889
+   const_labels:
+     label1: otlp-collector-docker
+
+extensions:
+ health_check:
+ pprof:
+   endpoint: :1888
+ zpages:
+   endpoint: :55679
+
+service:
+ extensions: [pprof, zpages, health_check]
+ pipelines:
+   logs:
+     receivers: [otlp]
+     processors: [batch, resource]
+     exporters: [logging, otlphttp/seq]
+   traces:
+     receivers: [otlp]
+     processors: [batch, resource]
+     exporters: [logging, otlphttp/jaeger]
+   metrics:
+     receivers: [otlp]
+     processors: [batch]
+     exporters: [logging, prometheus]

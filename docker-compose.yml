@@ -1,12 +1,88 @@
 version: "3.9"
-name: opentelemetry-collector
+name: the-base
+
 services:
 
+  blazor-wasm:
+    image: hubviwe/thebase.blazor.wasm:0.9.1
+    container_name: thebase-blazor-wasm
+    hostname: blazor-wasm
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    ports:
+      - 5062:8080
+    depends_on:
+      - gateway-api
+
+  gateway-api:
+    image: hubviwe/thebase.gateway.api:0.9.1
+    container_name: thebase-gateway-api
+    hostname: gateway-api
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    ports:
+      - 5128:8080
+    depends_on:
+      - auth-api
+      - feature-api
+      - realtime-api
+
+  realtime-api:
+    image: hubviwe/thebase.realtime.api:0.9.1
+    container_name: thebase-realtime-api
+    hostname: realtime-api
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    ports:
+      - 5265:8080
+    depends_on:
+      - otel-collector
+
+  auth-api:
+    image: hubviwe/thebase.auth.api:0.9.1
+    container_name: thebase-auth-api
+    hostname: auth-api
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    depends_on:
+      - otel-collector
+      - mssql
+
+  feature-api:
+    image: hubviwe/thebase.feature.api:0.9.1
+    container_name: thebase-feature-api
+    hostname: feature-api
+    restart: on-failure
+    environment:
+      ASPNETCORE_ENVIRONMENT: Docker
+    depends_on:
+      - otel-collector
+      - mssql
+
+  ##################################
+  # Database
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04
+    hostname: mssql
+    container_name: thebase-mssql
+    restart: on-failure
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: Example123
+
+  ##################################
+  # OpenTelemetry
+
   otel-collector:
-    container_name: opentelemetry-collector
     image: otel/opentelemetry-collector
+    hostname: otel-collector
+    container_name: thebase-otel-collector
     volumes:
-        - ./otel-collector-config.yaml:/etc/otel-collector-config.yaml
+        - ./config/otel-collector/otel-collector-config.yaml:/etc/otel-collector-config.yaml
     command: [ "--config=/etc/otel-collector-config.yaml" ]
     ports:
         - 1888:1888 # pprof extension
@@ -16,3 +92,56 @@ services:
         - 4317:4317 # OTLP gRPC receiver
         - 4318:4318 # OTLP http receiver
         - 55679:55679 # zpages extension
+    depends_on:
+        - jaeger
+        - seq
+        - grafana
+        - prometheus
+
+  jaeger:
+    image: jaegertracing/all-in-one
+    hostname: jaeger
+    container_name: thebase-jaeger
+    volumes:
+      - "./config/jaeger/jaeger-ui.json:/etc/jaeger/jaeger-ui.json"
+    command: --query.ui-config /etc/jaeger/jaeger-ui.json
+    environment:
+      COLLECTOR_OTLP_ENABLED: true
+      METRICS_STORAGE_TYPE: prometheus
+      PROMETHEUS_SERVER_URL: http://prometheus:9090
+      PROMETHEUS_QUERY_SUPPORT_SPANMETRICS_CONNECTOR: ${PROMETHEUS_QUERY_SUPPORT_SPANMETRICS_CONNECTOR:-true}
+      PROMETHEUS_QUERY_NAMESPACE: ${PROMETHEUS_QUERY_NAMESPACE:-}
+      PROMETHEUS_QUERY_DURATION_UNIT: ${PROMETHEUS_QUERY_DURATION_UNIT:-}
+      PROMETHEUS_QUERY_NORMALIZE_CALLS: true
+      PROMETHEUS_QUERY_NORMALIZE_DURATION: true
+    ports:
+      - 16686:16686 # jaeger ui
+
+  seq:
+    image: datalust/seq
+    hostname: seq
+    container_name: thebase-seq
+    restart: on-failure
+    environment:
+      ACCEPT_EULA: Y
+    ports:
+      - 81:80
+
+  grafana:
+    image: grafana/grafana
+    hostname: grafana
+    container_name: grafana
+    volumes:
+      - ./config/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./config/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards
+    ports:
+      - 3000:3000
+    depends_on:
+        - prometheus
+
+  prometheus:
+    image: prom/prometheus
+    hostname: prometheus
+    container_name: prometheus
+    volumes:
+      - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
