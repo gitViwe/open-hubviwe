@@ -34,6 +34,7 @@ You can access the swagger documentation through the gateway API, just select th
 
 You can access the traces through the Jaeger UI and explore how the services communicate.
 * [Jaeger UI endpoint](http://localhost:16686/)
+* ---
 ![Jaeger Screen Shot][auth-api-jaeger-screenshot]
 
 ### Logs
