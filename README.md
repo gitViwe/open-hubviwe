@@ -144,6 +144,9 @@ _For more examples, please refer to the documentation_
     - [ ] Permissions management
     - [ ] SendGrid
     - [ ] FIDO2
+    - [ ] Background service
+    - [ ] gRPC (internal communication)
+    - [ ] Feature Management
 - Feature API:
     - [x] Open API
     - [x] Health Check
@@ -152,12 +155,17 @@ _For more examples, please refer to the documentation_
     - [x] Azure App Configuration
     - [ ] Database Schema (Game)
     - [ ] Realtime integration (Game)
-    - [ ] Database Schema (Blog)
+    - [x] Database Schema (Blog)
+    - [ ] Background service
+    - [ ] gRPC (internal communication)
+    - [ ] Feature Management
 - Realtime API:
     - [ ] GraphQL
     - [x] SignalR
     - [x] Health Check
     - [x] Azure App Configuration
+    - [x] OpenTelemetry
+    - [x] Feature Management
 - Blazor Web Assembly:
     - [x] MudBlazor UI
     - [x] Mobile Client
@@ -169,7 +177,7 @@ _For more examples, please refer to the documentation_
     - [x] Authorization & Authentication
     - [ ] SignalR Page UI
     - [ ] GraphQL Page UI
-    - [ ] UI Components (Game)
+    - [ ] UI Components (SignalR demo)
     - [ ] UI Components (Blog)
     - [ ] FIDO2
     - [x] User Account Management
@@ -179,6 +187,7 @@ _For more examples, please refer to the documentation_
     - [ ] User Permission Management
     - [x] SignalR Integration
     - [x] File Upload
+    - [ ] Feature Management
 - Observability:
     - [x] OpenTelemetry collector
     - [x] Seq logging (Docker)
@@ -190,7 +199,7 @@ _For more examples, please refer to the documentation_
     - [x] GitHub action (Gateway)
     - [x] GitHub action (Authentication)
     - [x] GitHub action (Feature)
-    - [ ] GitHub action (Realtime)
+    - [x] GitHub action (Realtime)
 - Azure:
     - [x] API Gateway
     - [x] Authentication API
