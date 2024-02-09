@@ -77,10 +77,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 Things you need to use the software and how to install them.
-* [Visual Studio / Visual Studio Code](https://visualstudio.microsoft.com/)
-* [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 * [Docker](https://www.docker.com/)
-* [Node.js v18.16.0 (optional)](https://nodejs.org/en/download)
 
 ### Installation
 
@@ -146,7 +143,7 @@ _For more examples, please refer to the documentation_
     - [ ] FIDO2
     - [ ] Background service
     - [ ] gRPC (internal communication)
-    - [ ] Feature Management
+    - [x] Feature Management
 - Feature API:
     - [x] Open API
     - [x] Health Check
@@ -158,7 +155,7 @@ _For more examples, please refer to the documentation_
     - [x] Database Schema (Blog)
     - [ ] Background service
     - [ ] gRPC (internal communication)
-    - [ ] Feature Management
+    - [x] Feature Management
 - Realtime API:
     - [ ] GraphQL
     - [x] SignalR
@@ -208,41 +205,7 @@ _For more examples, please refer to the documentation_
     - [x] SignalR Server
     - [x] Blazor Web Assembly
 
-See the [open issues](https://github.com/gitViwe/open-hubviwe.git/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#top">back to top</a>)</p>
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Please reach out to me - viwe.nkepu@hotmail.com
-
-Project Link: [Blazor Playground](https://victorious-sand-022f5b51e.4.azurestaticapps.net/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* [Tim Corey](https://www.iamtimcorey.com)
-* [Mukesh Murugan](https://github.com/iammukeshm)
-* [Nick Chapsas](https://www.youtube.com/@nickchapsas)
-* [MudBlazor](https://mudblazor.com/)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
