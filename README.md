@@ -184,7 +184,7 @@ _For more examples, please refer to the documentation_
     - [ ] User Permission Management
     - [x] SignalR Integration
     - [x] File Upload
-    - [ ] Feature Management
+    - [x] Feature Management
 - Observability:
     - [x] OpenTelemetry collector
     - [x] Seq logging (Docker)
