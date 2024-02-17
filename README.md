@@ -141,8 +141,8 @@ _For more examples, please refer to the documentation_
     - [ ] Permissions management
     - [ ] SendGrid
     - [ ] FIDO2
-    - [ ] Background service
-    - [ ] gRPC (internal communication)
+    - [x] Background service
+    - [x] gRPC (internal communication)
     - [x] Feature Management
 - Feature API:
     - [x] Open API
@@ -153,8 +153,8 @@ _For more examples, please refer to the documentation_
     - [ ] Database Schema (Game)
     - [ ] Realtime integration (Game)
     - [x] Database Schema (Blog)
-    - [ ] Background service
-    - [ ] gRPC (internal communication)
+    - [x] Background service
+    - [x] gRPC (internal communication)
     - [x] Feature Management
 - Realtime API:
     - [ ] GraphQL
@@ -172,7 +172,7 @@ _For more examples, please refer to the documentation_
     - [x] Local Storage
     - [ ] Cache Storage
     - [x] Authorization & Authentication
-    - [ ] SignalR Page UI
+    - [x] SignalR Page UI
     - [ ] GraphQL Page UI
     - [ ] UI Components (SignalR demo)
     - [ ] UI Components (Blog)
@@ -189,7 +189,7 @@ _For more examples, please refer to the documentation_
     - [x] OpenTelemetry collector
     - [x] Seq logging (Docker)
     - [x] Jaeger traces (Docker)
-    - [ ] Grafana metrics (Docker)
+    - [x] Grafana metrics (Docker)
     - [x] Honeycomb (Production)
 - Pipeline:
     - [x] GitHub action (general)
