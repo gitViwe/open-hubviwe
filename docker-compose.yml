@@ -1,10 +1,10 @@
 version: "3.9"
-name: open-hubviwe
+name: the-base
 
 services:
 
   blazor-wasm:
-    image: hubviwe/thebase.blazor.wasm:0.9.6
+    image: hubviwe/thebase.blazor.wasm:0.9.7
     container_name: thebase-blazor-wasm
     hostname: blazor-wasm
     environment:
@@ -15,7 +15,7 @@ services:
       - gateway-api
 
   gateway-api:
-    image: hubviwe/thebase.gateway.api:0.9.6
+    image: hubviwe/thebase.gateway.api:0.9.7
     container_name: thebase-gateway-api
     hostname: gateway-api
     restart: on-failure
@@ -29,7 +29,7 @@ services:
       - realtime-api
 
   realtime-api:
-    image: hubviwe/thebase.realtime.api:0.9.6
+    image: hubviwe/thebase.realtime.api:0.9.7
     container_name: thebase-realtime-api
     hostname: realtime-api
     restart: on-failure
@@ -41,7 +41,7 @@ services:
       - otel-collector
 
   auth-api:
-    image: hubviwe/thebase.auth.api:0.9.6
+    image: hubviwe/thebase.auth.api:0.9.7
     container_name: thebase-auth-api
     hostname: auth-api
     restart: on-failure
@@ -52,7 +52,7 @@ services:
       - mssql
 
   feature-api:
-    image: hubviwe/thebase.feature.api:0.9.6
+    image: hubviwe/thebase.feature.api:0.9.7
     container_name: thebase-feature-api
     hostname: feature-api
     restart: on-failure
@@ -60,7 +60,7 @@ services:
       ASPNETCORE_ENVIRONMENT: Docker
     depends_on:
       - otel-collector
-      - mssql
+      - postgres
 
   ##################################
   # Database
@@ -73,6 +73,19 @@ services:
     environment:
       ACCEPT_EULA: Y
       MSSQL_SA_PASSWORD: Example123
+    volumes:
+      - mssqlsystem:/var/opt/mssql/
+
+  postgres:
+    image: postgres:16-alpine
+    hostname: postgres
+    container_name: postgres
+    restart: on-failure
+    environment:
+        POSTGRES_USER: user
+        POSTGRES_PASSWORD: pass
+    volumes:
+      - postgresqlststem:/var/lib/postgresql/data
 
   ##################################
   # OpenTelemetry
@@ -98,6 +111,7 @@ services:
         - grafana
         - prometheus
 
+  # https://www.jaegertracing.io/docs/next-release/getting-started/#all-in-one
   jaeger:
     image: jaegertracing/all-in-one
     hostname: jaeger
@@ -117,6 +131,7 @@ services:
     ports:
       - 16686:16686 # jaeger ui
 
+  # https://docs.datalust.co/docs/getting-started-with-docker
   seq:
     image: datalust/seq
     hostname: seq
@@ -127,6 +142,7 @@ services:
     ports:
       - 81:80
 
+  # default admin user credentials are admin/admin https://github.com/curityio/grafana/blob/master/README.md
   grafana:
     image: grafana/grafana
     hostname: grafana
@@ -145,3 +161,10 @@ services:
     container_name: prometheus
     volumes:
       - ./config/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  ##################################
+  # Volume
+
+volumes:
+  mssqlsystem:
+  postgresqlststem:  
