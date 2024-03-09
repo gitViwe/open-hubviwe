@@ -1,0 +1,17 @@
+subscription {
+    OverwatchSuperHeroDeployedSubscription {
+      id
+      combatMapId
+      deployedAt
+      gameMode {
+        name
+        icon
+        description
+        screenshot
+      }
+      superHero {
+        name
+        portrait
+     }
+  }
+}

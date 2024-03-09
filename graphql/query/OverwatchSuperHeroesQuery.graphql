@@ -1,0 +1,8 @@
+query {
+	OverwatchSuperHeroesQuery {
+		id
+		name
+		key
+		portrait
+	}
+}
