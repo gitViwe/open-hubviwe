@@ -4,7 +4,7 @@ name: open-hubviwe
 services:
 
   blazor-wasm:
-    image: hubviwe/thebase.blazor.wasm:0.9.6
+    image: hubviwe/thebase.blazor.wasm:0.9.8
     container_name: thebase-blazor-wasm
     hostname: blazor-wasm
     environment:
@@ -15,7 +15,7 @@ services:
       - gateway-api
 
   gateway-api:
-    image: hubviwe/thebase.gateway.api:0.9.6
+    image: hubviwe/thebase.gateway.api:0.9.8
     container_name: thebase-gateway-api
     hostname: gateway-api
     restart: on-failure
@@ -29,7 +29,7 @@ services:
       - realtime-api
 
   realtime-api:
-    image: hubviwe/thebase.realtime.api:0.9.6
+    image: hubviwe/thebase.realtime.api:0.9.8
     container_name: thebase-realtime-api
     hostname: realtime-api
     restart: on-failure
@@ -41,7 +41,7 @@ services:
       - otel-collector
 
   auth-api:
-    image: hubviwe/thebase.auth.api:0.9.6
+    image: hubviwe/thebase.auth.api:0.9.8
     container_name: thebase-auth-api
     hostname: auth-api
     restart: on-failure
@@ -52,7 +52,7 @@ services:
       - mssql
 
   feature-api:
-    image: hubviwe/thebase.feature.api:0.9.6
+    image: hubviwe/thebase.feature.api:0.9.8
     container_name: thebase-feature-api
     hostname: feature-api
     restart: on-failure
