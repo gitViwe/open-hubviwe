@@ -4,11 +4,7 @@ name: the-base
 services:
 
   blazor-wasm:
-<<<<<<< HEAD
     image: hubviwe/thebase.blazor.wasm:0.9.8
-=======
-    image: hubviwe/thebase.blazor.wasm:0.9.7
->>>>>>> d29cf2829d7ca41848f84fc9abe607c9fd503253
     container_name: thebase-blazor-wasm
     hostname: blazor-wasm
     environment:
@@ -19,11 +15,7 @@ services:
       - gateway-api
 
   gateway-api:
-<<<<<<< HEAD
     image: hubviwe/thebase.gateway.api:0.9.8
-=======
-    image: hubviwe/thebase.gateway.api:0.9.7
->>>>>>> d29cf2829d7ca41848f84fc9abe607c9fd503253
     container_name: thebase-gateway-api
     hostname: gateway-api
     restart: on-failure
@@ -37,11 +29,7 @@ services:
       - realtime-api
 
   realtime-api:
-<<<<<<< HEAD
     image: hubviwe/thebase.realtime.api:0.9.8
-=======
-    image: hubviwe/thebase.realtime.api:0.9.7
->>>>>>> d29cf2829d7ca41848f84fc9abe607c9fd503253
     container_name: thebase-realtime-api
     hostname: realtime-api
     restart: on-failure
@@ -53,11 +41,7 @@ services:
       - otel-collector
 
   auth-api:
-<<<<<<< HEAD
     image: hubviwe/thebase.auth.api:0.9.8
-=======
-    image: hubviwe/thebase.auth.api:0.9.7
->>>>>>> d29cf2829d7ca41848f84fc9abe607c9fd503253
     container_name: thebase-auth-api
     hostname: auth-api
     restart: on-failure
@@ -68,11 +52,7 @@ services:
       - mssql
 
   feature-api:
-<<<<<<< HEAD
     image: hubviwe/thebase.feature.api:0.9.8
-=======
-    image: hubviwe/thebase.feature.api:0.9.7
->>>>>>> d29cf2829d7ca41848f84fc9abe607c9fd503253
     container_name: thebase-feature-api
     hostname: feature-api
     restart: on-failure
