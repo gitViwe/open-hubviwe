@@ -1,0 +1,16 @@
+query {
+    OverwatchSuperHeroesQuery(where: { name: { contains: "e" }}) {
+        nodes {
+			id
+			name
+			key
+			portrait
+		}
+        pageInfo {
+			hasNextPage
+			hasPreviousPage
+			startCursor
+			endCursor
+		}
+    }
+}
