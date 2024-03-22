@@ -87,6 +87,14 @@ services:
     volumes:
       - postgresqlststem:/var/lib/postgresql/data
 
+  cosmosdb:
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+    hostname: cosmosdb
+    container_name: thebase-cosmosdb
+    restart: on-failure
+    ports:
+      - 8081:8081
+
   ##################################
   # OpenTelemetry
 
