@@ -55,6 +55,8 @@
 
 An overview of my playground, the landscape will most definitely change so please check back in from time to time...
 
+![The system architecture][architecture-screenshot]
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -226,3 +228,4 @@ _For more examples, please refer to the documentation_
 [services-diagram-screenshot]: images/services-diagram.svg
 [auth-api-diagram-screenshot]: images/auth-api-diagram.svg
 [feature-api-diagram-screenshot]: images/feature-api-diagram.svg
+[architecture-screenshot]: images/architecture-diagram.svg
