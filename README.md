@@ -55,8 +55,6 @@
 
 An overview of my playground, the landscape will most definitely change so please check back in from time to time...
 
-![The system architecture][architecture-screenshot]
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
@@ -128,7 +126,7 @@ _For more examples, please refer to the documentation_
     - [x] OpenTelemetry
     - [x] Docker support
     - [x] Azure App Configuration
-    - [ ] Rate limiting
+    - [x] Rate limiting
     - [ ] Versioning
     - [ ] Cache support
     - [ ] Compression support
@@ -143,7 +141,7 @@ _For more examples, please refer to the documentation_
     - [ ] Permissions management
     - [ ] SendGrid
     - [ ] FIDO2
-    - [x] Background service
+    - [ ] Background service
     - [x] gRPC (internal communication)
     - [x] Feature Management
 - Feature API:
@@ -174,7 +172,7 @@ _For more examples, please refer to the documentation_
     - [x] Local Storage
     - [ ] Cache Storage
     - [x] Authorization & Authentication
-    - [x] SignalR Page UI
+    - [ ] SignalR Page UI
     - [ ] GraphQL Page UI
     - [ ] UI Components (SignalR demo)
     - [ ] UI Components (Blog)

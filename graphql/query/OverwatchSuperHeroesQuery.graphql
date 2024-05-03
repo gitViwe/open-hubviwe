@@ -1,16 +1,75 @@
 query {
-    OverwatchSuperHeroesQuery(where: { name: { contains: "e" }}) {
-        nodes {
-			id
-			name
-			key
-			portrait
-		}
-        pageInfo {
-			hasNextPage
-			hasPreviousPage
-			startCursor
-			endCursor
-		}
-    }
+  OverwatchSuperHeroesWithDetailQuery(id: 2) {
+    id
+      name
+      key
+      portrait
+      detail {
+        id
+        name
+        description
+        portrait
+        location
+        hitpoints {
+          id
+          health
+          armor
+          shields
+          total
+        }
+        story {
+          id
+          summary
+          media {
+            id
+            type
+            link
+          }
+          chapters(first: 5) {
+            nodes {
+              id
+              title
+              content
+              picture
+            }
+            pageInfo {
+              hasNextPage
+              hasPreviousPage
+              startCursor
+              endCursor
+            }
+          }
+        }
+        role {
+          id
+          key
+          name
+          icon
+          description
+        }
+        abilities(first: 5) {
+          nodes {
+            id
+            name
+            description
+            icon
+            video {
+              id
+              thumbnail
+              link {
+                id
+                mp4
+                webm
+              }
+            }
+          }
+          pageInfo {
+            hasNextPage
+            hasPreviousPage
+            startCursor
+            endCursor
+          }
+        }
+      }
+  }
 }

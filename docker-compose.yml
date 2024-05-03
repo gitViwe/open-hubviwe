@@ -1,10 +1,9 @@
-version: "3.9"
 name: the-base
 
 services:
 
   blazor-wasm:
-    image: hubviwe/thebase.blazor.wasm:0.9.10
+    image: hubviwe/thebase.blazor.wasm:0.9.11
     container_name: thebase-blazor-wasm
     hostname: blazor-wasm
     environment:
@@ -15,7 +14,7 @@ services:
       - gateway-api
 
   gateway-api:
-    image: hubviwe/thebase.gateway.api:0.9.10
+    image: hubviwe/thebase.gateway.api:0.9.11
     container_name: thebase-gateway-api
     hostname: gateway-api
     restart: on-failure
@@ -29,7 +28,7 @@ services:
       - realtime-api
 
   realtime-api:
-    image: hubviwe/thebase.realtime.api:0.9.10
+    image: hubviwe/thebase.realtime.api:0.9.11
     container_name: thebase-realtime-api
     hostname: realtime-api
     restart: on-failure
@@ -41,7 +40,7 @@ services:
       - otel-collector
 
   auth-api:
-    image: hubviwe/thebase.auth.api:0.9.10
+    image: hubviwe/thebase.auth.api:0.9.11
     container_name: thebase-auth-api
     hostname: auth-api
     restart: on-failure
@@ -52,7 +51,7 @@ services:
       - mssql
 
   feature-api:
-    image: hubviwe/thebase.feature.api:0.9.10
+    image: hubviwe/thebase.feature.api:0.9.11
     container_name: thebase-feature-api
     hostname: feature-api
     restart: on-failure
@@ -77,9 +76,9 @@ services:
       - mssqlsystem:/var/opt/mssql/
 
   postgres:
-    image: postgres:16-alpine
+    image: postgres:15.1
     hostname: postgres
-    container_name: postgres
+    container_name: thebase-postgres
     restart: on-failure
     environment:
         POSTGRES_USER: user
@@ -88,7 +87,7 @@ services:
       - postgresqlststem:/var/lib/postgresql/data
 
   cosmosdb:
-    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest
+    image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:mongodb
     hostname: cosmosdb
     container_name: thebase-cosmosdb
     restart: on-failure
@@ -121,7 +120,7 @@ services:
 
   # https://www.jaegertracing.io/docs/next-release/getting-started/#all-in-one
   jaeger:
-    image: jaegertracing/all-in-one
+    image: jaegertracing/all-in-one:1.56
     hostname: jaeger
     container_name: thebase-jaeger
     volumes:
@@ -141,7 +140,7 @@ services:
 
   # https://docs.datalust.co/docs/getting-started-with-docker
   seq:
-    image: datalust/seq
+    image: datalust/seq:2024.2
     hostname: seq
     container_name: thebase-seq
     restart: on-failure
@@ -152,7 +151,7 @@ services:
 
   # default admin user credentials are admin/admin https://github.com/curityio/grafana/blob/master/README.md
   grafana:
-    image: grafana/grafana
+    image: grafana/grafana:10.4.2
     hostname: grafana
     container_name: grafana
     volumes:
@@ -164,7 +163,7 @@ services:
         - prometheus
 
   prometheus:
-    image: prom/prometheus
+    image: prom/prometheus:v2.51.2
     hostname: prometheus
     container_name: prometheus
     volumes:
