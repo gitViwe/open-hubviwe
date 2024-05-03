@@ -109,6 +109,7 @@ Let's pop open the toy box and discover the playground.
 Go to the [Blazor playground](http://localhost:5062/) to get started.
 
 _For more examples, please refer to the documentation_
+* [System Architecture](/documentation/architecture.md)
 * [Authentication API](/documentation/authentication-api.md)
 * [Feature API](/documentation/feature-api.md)
 * [Realtime API](/documentation/realtime-api.md)
