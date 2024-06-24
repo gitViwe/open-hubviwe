@@ -3,7 +3,7 @@ name: the-base
 services:
 
   blazor-wasm:
-    image: hubviwe/thebase.blazor.wasm:0.9.11
+    image: hubviwe/thebase.blazor.wasm:0.9.12
     container_name: thebase-blazor-wasm
     hostname: blazor-wasm
     environment:
@@ -14,7 +14,7 @@ services:
       - gateway-api
 
   gateway-api:
-    image: hubviwe/thebase.gateway.api:0.9.11
+    image: hubviwe/thebase.gateway.api:0.9.12
     container_name: thebase-gateway-api
     hostname: gateway-api
     restart: on-failure
@@ -28,7 +28,7 @@ services:
       - realtime-api
 
   realtime-api:
-    image: hubviwe/thebase.realtime.api:0.9.11
+    image: hubviwe/thebase.realtime.api:0.9.12
     container_name: thebase-realtime-api
     hostname: realtime-api
     restart: on-failure
@@ -40,7 +40,7 @@ services:
       - otel-collector
 
   auth-api:
-    image: hubviwe/thebase.auth.api:0.9.11
+    image: hubviwe/thebase.auth.api:0.9.12
     container_name: thebase-auth-api
     hostname: auth-api
     restart: on-failure
@@ -51,7 +51,7 @@ services:
       - mssql
 
   feature-api:
-    image: hubviwe/thebase.feature.api:0.9.11
+    image: hubviwe/thebase.feature.api:0.9.12
     container_name: thebase-feature-api
     hostname: feature-api
     restart: on-failure
@@ -74,6 +74,12 @@ services:
       MSSQL_SA_PASSWORD: Example123
     volumes:
       - mssqlsystem:/var/opt/mssql/
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd", "-U", "sa", "-P", "Example123", "-Q", "select 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 20s  # Provide a 15-second start period
 
   postgres:
     image: postgres:15.1
@@ -84,7 +90,13 @@ services:
         POSTGRES_USER: user
         POSTGRES_PASSWORD: pass
     volumes:
-      - postgresqlststem:/var/lib/postgresql/data
+      - postgresqlsystem:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s  # Provide a 15-second start period
 
   cosmosdb:
     image: mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:mongodb
@@ -93,6 +105,12 @@ services:
     restart: on-failure
     ports:
       - 8081:8081
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8081/_explorer/index.html"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 15s  # Provide a 15-second start period
 
   ##################################
   # OpenTelemetry
@@ -174,4 +192,4 @@ services:
 
 volumes:
   mssqlsystem:
-  postgresqlststem:  
+  postgresqlsystem:
